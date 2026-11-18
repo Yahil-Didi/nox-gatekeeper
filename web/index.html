@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nox Gatekeeper</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Nox Gatekeeper</h1>
+      <div id="account" hidden>
+        <span id="who"></span>
+        <button id="sign-out" type="button">Sign out</button>
+      </div>
+    </header>
+
+    <main>
+      <form id="sign-in" hidden>
+        <h2>Sign in</h2>
+        <label>Email <input name="email" type="email" autocomplete="username" required /></label>
+        <label>
+          Password
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <button type="submit">Sign in</button>
+        <p id="sign-in-error" class="error" role="alert"></p>
+      </form>
+
+      <section id="findings" hidden>
+        <div class="title-row">
+          <h2>Findings</h2>
+          <button id="refresh" type="button">Refresh</button>
+        </div>
+        <p class="hint">
+          Actions your agents tried that the policy refused. Retries are counted on one row.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Who</th>
+              <th>What</th>
+              <th>Why</th>
+              <th>Count</th>
+              <th>Last seen</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <p id="empty" class="hint" hidden>No findings yet. Nothing has been refused.</p>
+      </section>
+
+      <section id="keys" hidden>
+        <h2>Agent keys</h2>
+        <p class="hint">
+          Agents send one of these as <code>Authorization: Bearer &lt;key&gt;</code>.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Key</th>
+              <th>Created</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="key-rows"></tbody>
+        </table>
+        <form id="new-key" class="inline" hidden>
+          <input name="name" placeholder="New key name, e.g. Laptops" maxlength="100" required />
+          <button type="submit">Create key</button>
+        </form>
+        <p id="new-key-value" class="notice" hidden></p>
+        <p id="viewer-note" class="hint" hidden>
+          You're a viewer: you can see everything, but only admins can create or revoke keys.
+        </p>
+        <p id="key-error" class="error" role="alert"></p>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
